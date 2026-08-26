@@ -2,7 +2,7 @@ const MachineManager = {
   machinesIndex:[], currentMachine:null,
   async init(){
     try{
-      const res=await fetch('data/machines/index.json');if(!res.ok)throw new Error('index.json HTTP '+res.status);
+      const res=await fetch('index.json');if(!res.ok)throw new Error('index.json HTTP '+res.status);
       this.machinesIndex=await res.json();
       const saved=localStorage.getItem('slot_selected_machine_id'),target=saved||(this.machinesIndex[0]?.id);
       if(target)await this.loadMachine(target);
