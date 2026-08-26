@@ -1,0 +1,100 @@
+{
+  "id": "toaru-index2",
+  "name": "スマスロ とある魔術の禁書目録2",
+  "maker": "藤商事",
+  "specialEffectDefinitions": [
+    {
+      "id": "eyecatch_gold",
+      "label": "金枠アイキャッチ"
+    },
+    {
+      "id": "eyecatch_character",
+      "label": "特殊キャラクターアイキャッチ"
+    }
+  ],
+  "rules": [
+    {
+      "id": "rule_reset_tenoku",
+      "name": "朝イチ・リセット天国狙い",
+      "rank": "S",
+      "status": "GO",
+      "target": "200G+α（天国ゾーン）まで",
+      "stopCondition": "天国抜け（約200G）で前兆確認後やめ",
+      "conditions": {
+        "isReset": true,
+        "currentGMin": 0,
+        "currentGMax": 200
+      }
+    },
+    {
+      "id": "rule_cz_through_4",
+      "name": "CZ4スルー狙い（天井大本命）",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT終了後、高確・天国確認後やめ",
+      "conditions": {
+        "czThroughMin": 4
+      }
+    },
+    {
+      "id": "rule_cz_through_3_g",
+      "name": "CZ3スルー + 200G〜狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT終了後、高確確認やめ",
+      "conditions": {
+        "czThroughMin": 3,
+        "currentGMin": 200
+      }
+    },
+    {
+      "id": "rule_current_g_600",
+      "name": "通常ハマリ 600G〜狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "ATまたはCZ当選まで",
+      "stopCondition": "CZ失敗後またはAT終了後やめ",
+      "conditions": {
+        "currentGMin": 600
+      }
+    },
+    {
+      "id": "rule_at_g_1000",
+      "name": "AT間ハマリ 1000G〜狙い",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT終了後、状態確認やめ",
+      "conditions": {
+        "atGMin": 1000
+      }
+    },
+    {
+      "id": "rule_eyecatch_gold_rule",
+      "name": "金枠アイキャッチ確認",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT終了後やめ",
+      "conditions": {
+        "specialEffects": {
+          "eyecatch_gold": true
+        }
+      }
+    },
+    {
+      "id": "rule_tengoku_check",
+      "name": "100G以内の天国ゾーン確認",
+      "rank": "B",
+      "status": "TENGOKU",
+      "target": "200Gゾーン前兆終了まで",
+      "stopCondition": "前兆否定で即やめ",
+      "conditions": {
+        "currentGMin": 80,
+        "currentGMax": 150
+      }
+    }
+  ]
+}

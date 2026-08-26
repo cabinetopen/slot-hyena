@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#121212">
+<title>スマスロ ハイエナ判定</title>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div id="app">
+<header class="app-header">
+  <div class="header-content"><div class="app-title">🎰 スマスロ ハイエナ判定</div><button id="btn-open-settings" class="icon-btn" aria-label="設定">⚙️</button></div>
+  <div class="machine-selector-bar"><span class="label">機種</span><button id="btn-select-machine" class="machine-select-btn"><span id="current-machine-name">読み込み中...</span><span>▼</span></button></div>
+</header>
+<main class="app-main">
+
+<section id="view-home" class="view active">
+  <div class="card">
+    <h2>今打つべきか？</h2><p class="card-desc">現在の台情報から狙い目条件を安全側に判定します。</p>
+    <div class="menu-buttons">
+      <button id="btn-start-wizard" class="btn btn-primary btn-large"><span class="btn-icon">🧭</span><span class="btn-text">一問一答で判定<small>順番に質問へ回答</small></span></button>
+      <button id="btn-start-quick" class="btn btn-secondary btn-large"><span class="btn-icon">⚡</span><span class="btn-text">クイック手入力<small>まとめて入力して判定</small></span></button>
+      <button id="btn-start-ocr" class="btn btn-outline btn-large"><span class="btn-icon">📷</span><span class="btn-text">写真から読み取り<small>OCR後に確認して判定</small></span></button>
+    </div>
+  </div>
+  <div class="card"><div class="card-header-with-action"><h3>最近の判定</h3><button id="btn-view-history" class="btn-text-link">すべて見る</button></div><div id="home-history-list"></div></div>
+  <div class="notice">🌐 オンライン版：GitHub Pages上で動作します。判定履歴はこの端末のブラウザに保存されます。</div>
+</section>
+
+<section id="view-wizard" class="view">
+  <div class="wizard-header"><button class="btn-back btn-to-home">← ホーム</button><span id="wizard-step-indicator" class="wizard-progress"></span></div>
+  <div class="wizard-card"><h2 id="wizard-question-title"></h2><p id="wizard-question-desc" class="wizard-desc"></p><div id="wizard-options-container" class="wizard-options"></div></div>
+  <button id="btn-wizard-prev" class="btn btn-outline w-100">← 前の質問</button>
+</section>
+
+<section id="view-quick" class="view">
+  <div class="view-header"><button class="btn-back btn-to-home">← 戻る</button><h2>クイック手入力</h2></div>
+  <div class="card">
+    <div class="form-group"><label>朝イチ・リセット</label><div class="segmented-control">
+      <input type="radio" name="quick-reset" id="qr-u" value="unknown" checked><label for="qr-u">不明</label>
+      <input type="radio" name="quick-reset" id="qr-n" value="no"><label for="qr-n">いいえ</label>
+      <input type="radio" name="quick-reset" id="qr-y" value="yes"><label for="qr-y">はい</label>
+    </div></div>
+    <div class="form-group"><label>現在ゲーム数</label><input id="quick-current-g" type="number" inputmode="numeric" placeholder="例: 450"></div>
+    <div class="form-group"><label>CZスルー回数</label><input id="quick-cz-through" type="number" min="0" inputmode="numeric" placeholder="例: 3"></div>
+    <div class="form-group"><label>AT間ゲーム数 <span class="form-hint">不明なら空欄</span></label><input id="quick-at-g" type="number" min="0" inputmode="numeric" placeholder="例: 850"></div>
+    <div class="form-group"><label>エンディング後</label><div class="segmented-control">
+      <input type="radio" name="quick-ending" id="qe-n" value="no" checked><label for="qe-n">いいえ</label>
+      <input type="radio" name="quick-ending" id="qe-y" value="yes"><label for="qe-y">はい</label>
+    </div></div>
+    <div id="quick-special-effects-container"></div>
+    <button id="btn-quick-judge" class="btn btn-primary btn-large w-100">判定する</button>
+  </div>
+</section>
+
+<section id="view-ocr" class="view">
+  <div class="view-header"><button class="btn-back btn-to-home">← 戻る</button><h2>写真から読み取り</h2></div>
+  <div class="card">
+    <p class="card-desc">データランプを撮影・選択してください。OCR結果は必ず確認してから判定します。</p>
+    <button id="btn-trigger-camera" class="btn btn-primary btn-large w-100">📷 写真を選択・撮影</button>
+    <input id="ocr-file-input" type="file" accept="image/*" capture="environment" class="hidden">
+    <div id="ocr-preview-container" class="ocr-preview-container hidden"><img id="ocr-preview-img" alt="OCR対象画像"></div>
+    <p id="ocr-loading" class="empty-msg hidden">OCR解析中…</p>
+    <div id="ocr-result-form" class="hidden">
+      <div class="ocr-alert-box">⚠️ OCRは誤認識することがあります。数字を必ず確認してください。</div>
+      <div class="form-group"><label>現在ゲーム数 <span id="badge-current-g" class="confidence-badge">未検出</span></label><input id="ocr-input-current-g" type="number"></div>
+      <div class="form-group"><label>CZスルー回数 <span id="badge-cz-through" class="confidence-badge">未検出</span></label><input id="ocr-input-cz-through" type="number"></div>
+      <div class="form-group"><label>AT間ゲーム数 <span id="badge-at-g" class="confidence-badge">未検出</span></label><input id="ocr-input-at-g" type="number"></div>
+      <button id="btn-ocr-next-step" class="btn btn-primary btn-large w-100">確認して次へ</button>
+    </div>
+  </div>
+</section>
+
+<section id="view-result" class="view">
+  <div id="result-hero-card" class="result-hero result-status-unknown"><span id="result-status-badge" class="status-badge">⚪ 判定不能</span><div id="result-status-title" class="result-title">判定中</div><div class="result-target-box"><span class="target-label">狙い</span><span id="result-target-text" class="target-value">—</span></div></div>
+  <div class="card"><h3>判定理由</h3><ul id="result-reasons-list" class="result-list"></ul></div>
+  <div class="card"><h3>やめ時</h3><p id="result-stop-condition" class="stop-condition-text">—</p></div>
+  <div id="result-warning-card" class="card card-warning hidden"><h3>⚠️ 注意</h3><ul id="result-warnings-list" class="warning-list"></ul></div>
+  <button class="btn btn-primary btn-large w-100 btn-to-home">ホームへ戻る</button>
+</section>
+
+<section id="view-history" class="view">
+  <div class="view-header"><button class="btn-back btn-to-home">← 戻る</button><h2>判定履歴</h2></div>
+  <div class="card"><div id="full-history-list"></div></div>
+  <button id="btn-clear-history" class="btn btn-danger w-100">履歴をすべて削除</button>
+</section>
+
+<section id="view-settings" class="view">
+  <div class="view-header"><button class="btn-back btn-to-home">← 戻る</button><h2>設定</h2></div>
+  <div class="card"><h3>アプリデータ</h3><p class="card-desc">機種選択・判定履歴など、このブラウザに保存されたデータを初期化します。</p><button id="btn-reset-app-data" class="btn btn-danger w-100">保存データを初期化</button></div>
+</section>
+</main>
+</div>
+
+<div id="modal-machine-select" class="modal-overlay hidden"><div class="modal-content"><div class="modal-header"><h2>機種を選択</h2><button id="btn-close-machine-modal" class="close-btn">×</button></div><div id="machine-list-container" class="machine-list"></div></div></div>
+
+<!-- OCRのみオンラインで読み込む。アプリ本体はサーバー不要の静的ファイルです。 -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="./js/history.js"></script>
+<script src="./js/machineManager.js"></script>
+<script src="./js/judgeEngine.js"></script>
+<script src="./js/ocrService.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>
