@@ -1,0 +1,248 @@
+{
+  "id": "monkey-turn-v",
+  "name": "スマスロ モンキーターンV",
+  "maker": "山佐ネクスト",
+
+  "rules": [
+    {
+      "id": "morning-cycle-1",
+      "name": "朝イチ・1周期狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "1周期まで",
+      "stopCondition": "1周期終了後、優出・示唆を確認して打てなければやめ",
+      "conditions": {
+        "isReset": true,
+        "currentCycleEquals": 1,
+        "currentGMin": 50
+      }
+    },
+    {
+      "id": "morning-cycle-2plus",
+      "name": "朝イチ・2周期以降狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "狙い目条件達成まで",
+      "stopCondition": "1周期ごとに優出・示唆を確認",
+      "conditions": {
+        "isReset": true,
+        "currentCycleMin": 2,
+        "currentGMin": 120
+      }
+    },
+
+    {
+      "id": "normal-ceiling",
+      "name": "朝イチ以外・天井狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "天井狙い",
+      "stopCondition": "当選後状態確認してやめ",
+      "conditions": {
+        "isReset": false,
+        "currentGMin": 450
+      }
+    },
+
+    {
+      "id": "yuushutsu-cycle1",
+      "name": "優出狙い・1周期",
+      "rank": "A",
+      "status": "GO",
+      "target": "優出まで",
+      "stopCondition": "優出確認後、示唆を確認して打てなければやめ",
+      "conditions": {
+        "currentCycleEquals": 1,
+        "currentPointMin": 50
+      }
+    },
+    {
+      "id": "yuushutsu-cycle2-3",
+      "name": "優出狙い・2～3周期",
+      "rank": "A",
+      "status": "GO",
+      "target": "優出まで",
+      "stopCondition": "優出確認後、示唆を確認して打てなければやめ",
+      "conditions": {
+        "currentCycleMin": 2,
+        "currentCycleMax": 3,
+        "currentPointMin": 430
+      }
+    },
+    {
+      "id": "yuushutsu-cycle4",
+      "name": "優出狙い・4周期",
+      "rank": "A",
+      "status": "GO",
+      "target": "優出まで",
+      "stopCondition": "優出確認後、示唆を確認して打てなければやめ",
+      "conditions": {
+        "currentCycleEquals": 4,
+        "currentPointMin": 120
+      }
+    },
+
+    {
+      "id": "rival-hamaoka",
+      "name": "ライバルモード浜岡・前回550pt以上",
+      "rank": "S",
+      "status": "GO",
+      "target": "60ポイントから優出まで",
+      "stopCondition": "優出確認後、示唆を確認して打てなければやめ",
+      "conditions": {
+        "rivalMode": "浜岡",
+        "previousPointMin": 550,
+        "currentPointMin": 60
+      }
+    },
+
+    {
+      "id": "shortening-upper",
+      "name": "短縮狙い・上位後",
+      "rank": "S",
+      "status": "GO",
+      "target": "200G～",
+      "stopCondition": "短縮条件を確認して当選まで",
+      "conditions": {
+        "upperAfter": true,
+        "currentGMin": 200
+      }
+    },
+    {
+      "id": "shortening-aoshima-failed",
+      "name": "短縮狙い・青島VS波多野敗北後",
+      "rank": "S",
+      "status": "GO",
+      "target": "200G～",
+      "stopCondition": "短縮条件を確認して当選まで",
+      "conditions": {
+        "aoshimaVsHatanofailed": true,
+        "currentGMin": 200
+      }
+    },
+
+    {
+      "id": "advantage-cut",
+      "name": "有利切れ狙い・差枚1500枚付近",
+      "rank": "S",
+      "status": "GO",
+      "target": "1周期",
+      "stopCondition": "1周期のみ打ち、優出・示唆を確認して打てなければやめ",
+      "conditions": {
+        "currentCycleEquals": 1,
+        "diffMedalsMin": 1500
+      }
+    },
+
+    {
+      "id": "stage-initial",
+      "name": "ステージ狙い・初代ステージ",
+      "rank": "A",
+      "status": "GO",
+      "target": "優出まで",
+      "stopCondition": "優出確認後、示唆を確認して打てなければやめ",
+      "conditions": {
+        "stage": "初代ステージ"
+      }
+    },
+    {
+      "id": "stage-terminal",
+      "name": "ステージ狙い・終電ステージ",
+      "rank": "A",
+      "status": "GO",
+      "target": "優出まで",
+      "stopCondition": "優出確認後、示唆を確認して打てなければやめ",
+      "conditions": {
+        "stage": "終電ステージ"
+      }
+    },
+    {
+      "id": "stage-black",
+      "name": "ステチェン黒",
+      "rank": "A",
+      "status": "GO",
+      "target": "その周期",
+      "stopCondition": "その周期終了後、優出・示唆を確認して打てなければやめ",
+      "conditions": {
+        "stage": "ステチェン黒"
+      }
+    },
+
+    {
+      "id": "item-penguin",
+      "name": "アイテム狙い・ペンギン",
+      "rank": "A",
+      "status": "GO",
+      "target": "打てる",
+      "stopCondition": "アイテムによる示唆を確認して判断",
+      "conditions": {
+        "item": "ペンギン"
+      }
+    },
+
+    {
+      "id": "helmet-v",
+      "name": "AT後ヘルメット・ロゴV付き",
+      "rank": "S",
+      "status": "GO",
+      "target": "打てる",
+      "stopCondition": "ヘルメット示唆を確認して判断",
+      "conditions": {
+        "helmet": "ロゴV付き"
+      }
+    },
+    {
+      "id": "helmet-monochrome",
+      "name": "AT後ヘルメット・モノクロ波多野",
+      "rank": "S",
+      "status": "GO",
+      "target": "打てる",
+      "stopCondition": "ヘルメット示唆を確認して判断",
+      "conditions": {
+        "helmet": "モノクロ波多野"
+      }
+    },
+    {
+      "id": "helmet-aoshima",
+      "name": "AT後ヘルメット・青島",
+      "rank": "S",
+      "status": "GO",
+      "target": "打てる",
+      "stopCondition": "ヘルメット示唆を確認して判断",
+      "conditions": {
+        "helmet": "青島"
+      }
+    }
+  ],
+
+  "specialEffectDefinitions": [
+    {
+      "id": "stage_initial",
+      "label": "ステージ：初代ステージ"
+    },
+    {
+      "id": "stage_terminal",
+      "label": "ステージ：終電ステージ"
+    },
+    {
+      "id": "stage_black",
+      "label": "ステチェン：黒"
+    },
+    {
+      "id": "item_penguin",
+      "label": "アイテム：ペンギン"
+    },
+    {
+      "id": "helmet_v",
+      "label": "AT後ヘルメット：ロゴV付き"
+    },
+    {
+      "id": "helmet_monochrome",
+      "label": "AT後ヘルメット：モノクロ波多野"
+    },
+    {
+      "id": "helmet_aoshima",
+      "label": "AT後ヘルメット：青島"
+    }
+  ]
+}
