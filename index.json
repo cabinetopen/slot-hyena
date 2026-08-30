@@ -4,5 +4,11 @@
     "name": "スマスロ とある魔術の禁書目録2",
     "maker": "藤商事",
     "file": "toaru-index2.json"
+  },
+  {
+    "id": "tokyo-ghoul",
+    "name": "スマスロ 東京喰種",
+    "maker": "アデリオン",
+    "file": "tokyo-ghoul.json"
   }
 ]
