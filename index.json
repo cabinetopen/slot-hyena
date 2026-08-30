@@ -10,5 +10,11 @@
     "name": "スマスロ 東京喰種",
     "maker": "アデリオン",
     "file": "tokyo-ghoul.json"
+  },
+  {
+    "id": "monkey-turn-v",
+    "name": "スマスロ モンキーターンV",
+    "maker": "山佐ネクスト",
+    "file": "monkey-turn-v.json"
   }
 ]
