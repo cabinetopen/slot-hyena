@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       MachineManager.getCurrentMachine();
     if (!machine) return;
     const isMonkey =
-      machine.id === 'monkey-turn';
+      machine.id === 'monkey-turn-v';
     if (isMonkey) {
       renderMonkeyWizardStep();
       return;
@@ -829,7 +829,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const machine =
       MachineManager.getCurrentMachine();
     const maxStep =
-      machine?.id === 'monkey-turn'
+      machine?.id === 'monkey-turn-v'
         ? 5
         : 5;
     if (currentStep >= maxStep) {
@@ -860,7 +860,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!machine) return;
     // モンキーターン
     if (
-      machine.id === 'monkey-turn'
+      machine.id === 'monkey-turn-v'
     ) {
       container.innerHTML = `
         <div class="form-group">
@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // モンキーターン
         if (
           machine?.id ===
-          'monkey-turn'
+          'monkey-turn-v'
         ) {
           const upper =
             document.getElementById(
