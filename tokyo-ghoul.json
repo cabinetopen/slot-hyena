@@ -1,0 +1,651 @@
+{
+  "id": "tokyo-ghoul",
+  "name": "スマスロ 東京喰種",
+  "maker": "アデリオン",
+  "specialEffectDefinitions": [
+    {
+      "id": "run_through",
+      "label": "前回ATは駆け抜けでしたか？"
+    },
+    {
+      "id": "big_win_1000",
+      "label": "前回一撃1000枚以上出ていますか？"
+    },
+    {
+      "id": "arima_judgement_failed",
+      "label": "有馬ジャッジメント失敗後ですか？"
+    },
+    {
+      "id": "tsukishima_invitation_now",
+      "label": "月島の招待状「今すぐ～」ですか？"
+    },
+    {
+      "id": "tsukishima_invitation_2pm",
+      "label": "月島の招待状「2時までに～」ですか？"
+    },
+    {
+      "id": "cz_end_kanade",
+      "label": "CZ終了画面が神代利世ですか？"
+    },
+    {
+      "id": "cz_end_tsukishima",
+      "label": "CZ終了画面が月島習ですか？"
+    },
+    {
+      "id": "eyecatch_kanade",
+      "label": "アイキャッチが神代利世ですか？"
+    },
+    {
+      "id": "kegare_large",
+      "label": "穢れ示唆「大」ですか？"
+    }
+  ],
+  "rules": [
+    {
+      "id": "tg_arima_failed",
+      "name": "有馬ジャッジメント失敗後",
+      "rank": "S",
+      "status": "TENGOKU",
+      "target": "天国まで",
+      "stopCondition": "天国確認後やめ",
+      "conditions": {
+        "specialEffects": {
+          "arima_judgement_failed": true
+        }
+      }
+    },
+    {
+      "id": "tg_invitation_now",
+      "name": "月島の招待状「今すぐ～」",
+      "rank": "S",
+      "status": "GO",
+      "target": "当選まで",
+      "stopCondition": "当選後、状態確認してやめ",
+      "conditions": {
+        "specialEffects": {
+          "tsukishima_invitation_now": true
+        }
+      }
+    },
+    {
+      "id": "tg_invitation_2pm",
+      "name": "月島の招待状「2時までに～」",
+      "rank": "S",
+      "status": "GO",
+      "target": "当選まで",
+      "stopCondition": "当選後、状態確認してやめ",
+      "conditions": {
+        "specialEffects": {
+          "tsukishima_invitation_2pm": true
+        }
+      }
+    },
+    {
+      "id": "tg_cz_end_kanade",
+      "name": "CZ終了画面 神代利世",
+      "rank": "S",
+      "status": "TENGOKU",
+      "target": "当選まで打って次の天国まで",
+      "stopCondition": "当選後、次の天国確認まで",
+      "conditions": {
+        "specialEffects": {
+          "cz_end_kanade": true
+        }
+      }
+    },
+    {
+      "id": "tg_cz_end_tsukishima",
+      "name": "CZ終了画面 月島習",
+      "rank": "S",
+      "status": "GO",
+      "target": "当たりまで打って次の天国まで",
+      "stopCondition": "当選後、次の天国確認まで",
+      "conditions": {
+        "specialEffects": {
+          "cz_end_tsukishima": true
+        }
+      }
+    },
+    {
+      "id": "tg_eyecatch_kanade",
+      "name": "アイキャッチ 神代利世",
+      "rank": "S",
+      "status": "TENGOKU",
+      "target": "当たりまで打って次の天国まで",
+      "stopCondition": "当選後、次の天国確認まで",
+      "conditions": {
+        "specialEffects": {
+          "eyecatch_kanade": true
+        }
+      }
+    },
+    {
+      "id": "tg_kegare_large",
+      "name": "穢れ示唆 大",
+      "rank": "S",
+      "status": "GO",
+      "target": "穢れ解放まで",
+      "stopCondition": "穢れ解放後、状態確認してやめ",
+      "conditions": {
+        "specialEffects": {
+          "kegare_large": true
+        }
+      }
+    },
+
+    {
+      "id": "tg_reset_cz_0",
+      "name": "朝イチ 0スルー CZ狙い",
+      "rank": "S",
+      "status": "GO",
+      "target": "CZ当選まで",
+      "stopCondition": "CZ当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMax": 0,
+        "currentGMin": 0
+      }
+    },
+    {
+      "id": "tg_reset_cz_1",
+      "name": "朝イチ 1スルー 100Gゾーン狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "100Gのゾーン確認まで",
+      "stopCondition": "100Gゾーン確認後やめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGMin": 0,
+        "currentGMax": 100
+      }
+    },
+    {
+      "id": "tg_reset_cz_2",
+      "name": "朝イチ 2スルー 50～100Gゾーン狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "50～100Gのゾーン確認まで",
+      "stopCondition": "100Gゾーン確認後やめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGMin": 50,
+        "currentGMax": 100
+      }
+    },
+
+    {
+      "id": "tg_reset_at_1_0",
+      "name": "朝イチ 1スルー AT間560G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 0,
+        "atGMin": 560
+      }
+    },
+    {
+      "id": "tg_reset_at_1_100",
+      "name": "朝イチ 1スルー AT間500G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 100,
+        "atGMin": 500
+      }
+    },
+    {
+      "id": "tg_reset_at_1_280",
+      "name": "朝イチ 1スルー 液晶280G～",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGMin": 280,
+        "atGMin": 0
+      }
+    },
+
+    {
+      "id": "tg_reset_at_2_0",
+      "name": "朝イチ 2スルー AT間520G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 0,
+        "atGMin": 520
+      }
+    },
+    {
+      "id": "tg_reset_at_2_100",
+      "name": "朝イチ 2スルー AT間460G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 100,
+        "atGMin": 460
+      }
+    },
+    {
+      "id": "tg_reset_at_2_230",
+      "name": "朝イチ 2スルー 液晶230G～",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGMin": 230,
+        "atGMin": 0
+      }
+    },
+    {
+      "id": "tg_reset_3plus",
+      "name": "朝イチ 3スルー以降",
+      "rank": "S",
+      "status": "GO",
+      "target": "当たりまで",
+      "stopCondition": "当選後、状態確認してやめ",
+      "conditions": {
+        "isReset": true,
+        "czThroughMin": 3,
+        "currentGMin": 0
+      }
+    },
+
+    {
+      "id": "tg_runthrough_cz_0",
+      "name": "駆け抜け後 0スルー CZ狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "CZ当選まで",
+      "stopCondition": "CZ当選後、状態確認してやめ",
+      "conditions": {
+        "runThrough": true,
+        "czThroughMax": 0,
+        "currentGMin": 270
+      }
+    },
+
+    {
+      "id": "tg_runthrough_at_1_0",
+      "name": "駆け抜け後 1スルー AT間680G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "runThrough": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 0,
+        "atGMin": 680
+      }
+    },
+    {
+      "id": "tg_runthrough_at_1_150",
+      "name": "駆け抜け後 1スルー AT間620G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "runThrough": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 150,
+        "atGMin": 620
+      }
+    },
+    {
+      "id": "tg_runthrough_at_1_270",
+      "name": "駆け抜け後 1スルー 液晶270G～",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "runThrough": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGMin": 270,
+        "atGMin": 0
+      }
+    },
+
+    {
+      "id": "tg_runthrough_at_2_0",
+      "name": "駆け抜け後 2スルー AT間310G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "runThrough": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 0,
+        "atGMin": 310
+      }
+    },
+    {
+      "id": "tg_runthrough_at_2_150",
+      "name": "駆け抜け後 2スルー 液晶150G～",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "runThrough": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGMin": 150,
+        "atGMin": 0
+      }
+    },
+    {
+      "id": "tg_runthrough_3plus",
+      "name": "駆け抜け後 3スルー以降",
+      "rank": "S",
+      "status": "GO",
+      "target": "当たりまで",
+      "stopCondition": "当選後、状態確認してやめ",
+      "conditions": {
+        "runThrough": true,
+        "czThroughMin": 3,
+        "currentGMin": 0
+      }
+    },
+
+    {
+      "id": "tg_normal_cz_0",
+      "name": "駆け抜け以外 0スルー CZ狙い",
+      "rank": "A",
+      "status": "GO",
+      "target": "CZ当選まで",
+      "stopCondition": "CZ当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMax": 0,
+        "currentGMin": 350
+      }
+    },
+
+    {
+      "id": "tg_normal_at_1_0",
+      "name": "通常 1スルー AT間880G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 0,
+        "atGMin": 880
+      }
+    },
+    {
+      "id": "tg_normal_at_1_150",
+      "name": "通常 1スルー 液晶150G AT間780G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 150,
+        "atGMin": 780
+      }
+    },
+    {
+      "id": "tg_normal_at_1_290",
+      "name": "通常 1スルー 液晶290G～",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGMin": 290,
+        "atGMin": 0
+      }
+    },
+
+    {
+      "id": "tg_normal_at_2_0",
+      "name": "通常 2スルー AT間560G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 0,
+        "atGMin": 560
+      }
+    },
+    {
+      "id": "tg_normal_at_2_100",
+      "name": "通常 2スルー 液晶100G AT間500G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 100,
+        "atGMin": 500
+      }
+    },
+    {
+      "id": "tg_normal_at_2_200",
+      "name": "通常 2スルー 液晶200G AT間450G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 200,
+        "atGMin": 450
+      }
+    },
+    {
+      "id": "tg_normal_at_2_250",
+      "name": "通常 2スルー 液晶250G～",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGMin": 250,
+        "atGMin": 0
+      }
+    },
+
+    {
+      "id": "tg_normal_at_3_0",
+      "name": "通常 3スルー 液晶0G AT間400G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 3,
+        "czThroughMax": 3,
+        "currentGEquals": 0,
+        "atGMin": 400
+      }
+    },
+    {
+      "id": "tg_normal_at_3_100",
+      "name": "通常 3スルー 液晶100G～",
+      "rank": "S",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 3,
+        "czThroughMax": 3,
+        "currentGMin": 100,
+        "atGMin": 0
+      }
+    },
+    {
+      "id": "tg_normal_4plus",
+      "name": "通常 4スルー以降",
+      "rank": "S",
+      "status": "GO",
+      "target": "当たりまで",
+      "stopCondition": "当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "czThroughMin": 4,
+        "currentGMin": 0
+      }
+    },
+
+    {
+      "id": "tg_bigwin_at_1_0",
+      "name": "一撃1000枚以上後 1スルー AT間1080G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "bigWin1000": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 0,
+        "atGMin": 1080
+      }
+    },
+    {
+      "id": "tg_bigwin_at_1_150",
+      "name": "一撃1000枚以上後 1スルー 液晶150G AT間980G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "bigWin1000": true,
+        "czThroughMin": 1,
+        "czThroughMax": 1,
+        "currentGEquals": 150,
+        "atGMin": 980
+      }
+    },
+    {
+      "id": "tg_bigwin_at_2_0",
+      "name": "一撃1000枚以上後 2スルー AT間760G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "bigWin1000": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 0,
+        "atGMin": 760
+      }
+    },
+    {
+      "id": "tg_bigwin_at_2_100",
+      "name": "一撃1000枚以上後 2スルー 液晶100G AT間700G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "bigWin1000": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 100,
+        "atGMin": 700
+      }
+    },
+    {
+      "id": "tg_bigwin_at_2_200",
+      "name": "一撃1000枚以上後 2スルー 液晶200G AT間650G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "bigWin1000": true,
+        "czThroughMin": 2,
+        "czThroughMax": 2,
+        "currentGEquals": 200,
+        "atGMin": 650
+      }
+    },
+    {
+      "id": "tg_bigwin_at_3_0",
+      "name": "一撃1000枚以上後 3スルー 液晶0G AT間600G～",
+      "rank": "A",
+      "status": "GO",
+      "target": "AT当選まで",
+      "stopCondition": "AT当選後、状態確認してやめ",
+      "conditions": {
+        "notRunThrough": true,
+        "bigWin1000": true,
+        "czThroughMin": 3,
+        "czThroughMax": 3,
+        "currentGEquals": 0,
+        "atGMin": 600
+      }
+    }
+  ]
+}
